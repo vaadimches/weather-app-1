@@ -1,14 +1,20 @@
+import { WeatherInfo } from "./components/weatherInfo"
+import WeatherHead from "./components/weatherHead";
+import { createContext, useState } from "react"
+
+export const CurrentCityName = createContext(null)
+
 function App() {
+  const [dataCont, setDataCont] = useState<string | undefined>(null)
+
   return (
     <>
-      <h1>Weather app</h1>
-      <input type="text" placeholder="input your city"/>
-      <button>search</button>
-      <h2>City</h2>
-      <p>temperature</p>
-      <p>Clear</p>
+    <CurrentCityName value={{dataCont, setDataCont}}>
+      <WeatherHead />
+      <WeatherInfo />
+    </CurrentCityName>
     </>
-  )
+  ) 
 }
 
 export default App
