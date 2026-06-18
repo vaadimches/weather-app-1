@@ -1,5 +1,7 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
 import { getWeatherInfo } from "../services/weatherAPI";
+import {CurrentCityName} from "./../App"
+
 
 type weatherType = {
     name: string,
@@ -8,25 +10,26 @@ type weatherType = {
     wind_kph: number,
     humidity: number,
     icon: string,
-    iconText: string
+    iconText: string,
+    localtime: string
 }
 
-export function Weather(props){
+export function WeatherInfo(){
     const[city, setCity] = useState<weatherType>(null)
+    var dataContext = useContext(CurrentCityName)
 
     useEffect(()=>{
         const fetchWeatherData = async ()=>{
-            const getInfo = await getWeatherInfo(props.city);
-            console.log(getInfo)
+            const getInfo = await getWeatherInfo(dataContext?.dataCont);
             setCity(getInfo)
         }
         fetchWeatherData()
-    },[props.city])
-    
+    },[dataContext?.dataCont])
     return(
         <div>
             {city?.name ? <p>{city?.name}</p> : <p>Please enter your city</p>}
             <p>{city?.region}</p>
+            <p>{city?.localtime}</p>
             <p>temperature: {city?.temperature} °C</p>
             <p>wind: {city?.wind_kph}kph</p>
             <p>humidity: {city?.humidity}%</p>

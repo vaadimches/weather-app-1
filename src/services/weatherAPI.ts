@@ -18,6 +18,7 @@ export async function getWeatherInfo(city:string) {
         wind_kph: weatherInfo.current.wind_kph,
         humidity: weatherInfo.current.humidity,
         icon: weatherInfo.current.condition.icon,
-        iconText: weatherInfo.current.condition.text
+        iconText: weatherInfo.current.condition.text,
+        localtime: weatherInfo.location.localtime
     };
 }
