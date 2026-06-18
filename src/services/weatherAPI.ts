@@ -1,4 +1,4 @@
-const api_key = "97c4c44ab1814f53b9a154443261506";
+const api_key = import.meta.env.VITE_WEATHER_API_KEY
 
 export async function getWeatherInfo(city:string) {
     const url = `http://api.weatherapi.com/v1/current.json?key=${api_key}&q=${city}`;
@@ -10,7 +10,6 @@ export async function getWeatherInfo(city:string) {
         throw new Error('There`s something wrong')
     const weatherInfo = await result.json()
 
-    console.log(weatherInfo)
     return {
         name: weatherInfo.location.name,
         region: weatherInfo.location.region,
